@@ -1,0 +1,17 @@
+.app {
+    padding: 96px 0;
+    height: 100%;
+
+    .main__frame {
+        @media screen and (min-width: 1400px) {
+            max-width: 800px;
+        }
+
+        @media screen and (min-width: 769px) {
+            max-width: 600px;
+        }
+
+        width: 100%;
+        margin: auto;
+    }
+}
