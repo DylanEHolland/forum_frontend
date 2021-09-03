@@ -1,5 +1,5 @@
 import React from 'react';
-import {fetchApiHome} from './api';
+import {fetchApiHome} from './api/user';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import './custom.scss';
 

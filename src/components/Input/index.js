@@ -5,12 +5,16 @@ import './custom.scss';
 
 class Input extends React.Component {
     render = () => {
-        let {password, placeholder, displayBlock} = this.props;
+        let {password, placeholder, displayBlock, style, onChange} = this.props;
 
-        let style = {}
+        if(!style) {
+            style = {};
+        } else {
+            style = Object(style);
+        }
 
         if(displayBlock) {
-            style.display = 'block';
+            style.display = 'Block';
         }
 
         return (
@@ -19,6 +23,13 @@ class Input extends React.Component {
                 placeholder={placeholder}
                 style={style}
                 type={password ? "password" : "text"}
+                onChange={
+                    e => {
+                        if(onChange) {
+                            onChange(e.target.value);       
+                        }
+                    }
+                }
             />
         );
     }

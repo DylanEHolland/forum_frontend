@@ -11,22 +11,30 @@ class Button extends React.Component {
     }
 
     render = () => {
-        let {children, displayBlock, style} = this.props;
+        let {children, displayBlock, style, onClick} = this.props;
         
-        let custom_style = {};
-        if(style) {
-            custom_style = style;
+        if(!style) {
+            style = {};
+        } else {
+            style = Object(style);
         }
 
         if(displayBlock) {
-            custom_style.display = 'Block';
+            style.display = 'Block';
         }
 
 
         return (
             <button
-                style={custom_style}
+                style={style}
                 className="custom__button"
+                onClick={
+                    () => {
+                        if(onClick) {
+                            onClick();
+                        }
+                    }
+                }
             >
                 {children}
             </button>
