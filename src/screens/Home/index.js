@@ -1,15 +1,24 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
+import { fetchApiHome } from '../../api/user';
 
 import './custom.scss';
 
-import LoginSignUp from "../../components/LoginSignUp";
-
 class Home extends React.Component {
+
+    componentDidMount() {
+        fetchApiHome()
+        .then(
+            res => {
+                console.log("test:")
+            }
+        )
+    }
+
     render = () => {
         return (
             <div>
-                <LoginSignUp />
+                {/* <LoginSignUp /> */}
             </div>
         );
     }

@@ -9,10 +9,31 @@ import Button from '../Button';
 
 import {SignUpUser} from "../../api/user";
 
+import store from 'store';
+
 class LoginSignUp extends React.Component {
     state = {
         user_name: "",
-        pass_word: ""
+        pass_word: "",
+        token: null
+    }
+
+    componentDidMount() {
+        this._forwardIfLoggedIn();
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.token !== this.state.token) {
+            this._forwardIfLoggedIn();
+        } else {
+            console.log("no change")
+        }
+    }
+
+    _forwardIfLoggedIn = () => {
+        if(this.token || store.get('token')) {
+            this.props.history.push("/")
+        }
     }
 
     render = () => {
@@ -53,7 +74,15 @@ class LoginSignUp extends React.Component {
         SignUpUser(this.state)
         .then(
             res => {
-                console.log(res);
+                if(res.Err) {
+                    console.log("error", res.Err);
+                } else {
+                    console.log(res.token);
+                    store.set('token', res.token);
+                    this.setState({
+                        token: res.token
+                    })
+                }
             }
         )
     }

@@ -1,6 +1,14 @@
-import { API_URL, headers } from "../constants";
+import { API_URL, JSON_HEADERS } from "../constants";
+import store from 'store';
+
 
 export const fetchApiHome = () => {
+    const headers = { ...JSON_HEADERS };
+    // headers['Authorization'] = 'Bearer: ' + store.get('token');
+    headers['Authorization'] = store.get('token');
+
+    console.log(headers);
+
     return fetch(API_URL, {
         method: "GET",
         headers
@@ -12,7 +20,7 @@ export const SignUpUser = userData => {
     
     return fetch(url, {
         method: "POST",
-        headers,
+        JSON_HEADERS,
         body: JSON.stringify(userData)
     }).then(res => res.json())
 }
